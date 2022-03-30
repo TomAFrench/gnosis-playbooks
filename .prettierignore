@@ -1,0 +1,12 @@
+# directories
+.yarn/
+**/dist
+**/node_modules
+
+# files
+*.env
+*.log
+.pnp.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

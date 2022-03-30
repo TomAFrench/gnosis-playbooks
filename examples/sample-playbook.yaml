@@ -1,0 +1,70 @@
+version: 0.0.1
+chainId: 1
+
+constants:
+  authorizerAdaptor:
+    value: "0x8F42aDBbA1B16EaAE3BB5754915E0D06059aDd75"
+    type: address
+  gaugeFactory:
+    value: "0x4E7bBd911cf1EFa442BC1b2e9Ea01ffE785412EC"
+    type: address
+
+actions:
+  - id: deployGauge
+    name: Deploy a gauge
+    args:
+      - id: poolAddress
+        description: The address of the pool to deploy a gauge for.
+        type: address
+    transactions:
+      - to: gaugeFactory
+        function: deploy(address)
+        args:
+          - poolAddress
+
+  - id: addNewRewardToken
+    name: Add new reward token to a gauge
+    args:
+      - id: gaugeAddress
+        description: The address of the gauge to add a new reward token to.
+        type: address
+      - id: tokenAddress
+        description: The address of the token to add as a gauge as a reward token.
+        type: address
+    variables:
+      - id: addRewardCalldata
+        type: functionCallData
+        function: add_reward_token(address, address)
+        args:
+          - tokenAddress
+          - msgSender
+    transactions:
+      - to: authorizerAdaptor
+        function: performAction(address, bytes)
+        args:
+          - gaugeAddress
+          - addRewardCalldata
+
+  - id: depositRewardTokens
+    name: Add rewards to a gauge
+    args:
+      - id: gaugeAddress
+        description: The address of the gauge to add deposit reward tokens into.
+        type: address
+      - id: tokenAddress
+        description: The token to deposit into the gauge for distribution.
+        type: address
+      - id: amount
+        description: The amount of tokens to distribute over the next week.
+        type: uint256
+    transactions:
+      - to: tokenAddress
+        function: approve(address, uint256)
+        args:
+          - gaugeAddress
+          - amount
+      - to: gaugeAddress
+        function: deposit_reward_tokens(address, uint256)
+        args:
+          - tokenAddress
+          - amount

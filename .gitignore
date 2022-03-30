@@ -1,0 +1,18 @@
+# directories
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+**/dist
+**/node_modules
+
+# files
+*.env
+*.log
+*.tsbuildinfo
+coverage.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
