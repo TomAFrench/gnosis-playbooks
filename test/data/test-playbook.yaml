@@ -1,0 +1,14 @@
+version: 0.0.1
+chainId: 1
+
+constants:
+  zeroAddress:
+    value: "0x0000000000000000000000000000000000000000"
+    type: address
+
+actions:
+  - id: simpleAction
+    name: Perform a simple action
+    transactions:
+      - to: zeroAddress
+        function: foo()
