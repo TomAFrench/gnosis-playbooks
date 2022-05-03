@@ -3,7 +3,7 @@ import yaml from "js-yaml";
 import path from "path";
 import { exit } from "process";
 
-import { Playbook, isPlaybook } from "../src/types";
+import { Playbook, isPlaybook } from "../src";
 
 export const loadPlaybookFromFile = async (playbookPath: string): Promise<Playbook> => {
   const playbookFilePath = path.resolve(__dirname, playbookPath);

@@ -5,6 +5,7 @@ export {
   Transaction,
   Action,
   Playbook,
+  BatchTransaction,
   isArgument,
   isVariable,
   isTransaction,
@@ -12,3 +13,4 @@ export {
   isPlaybook,
 } from "./types";
 export { validateArgument } from "./validation";
+export { generateBatchFile } from "./batchFile";

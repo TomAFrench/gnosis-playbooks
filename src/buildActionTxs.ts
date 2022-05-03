@@ -1,7 +1,5 @@
-import { BaseTransaction } from "@gnosis.pm/safe-apps-sdk";
-
 import { fillTransactionTemplates, fillVariableTemplates } from "./templating";
-import { Argument, Playbook, Value } from "./types";
+import { Argument, BatchTransaction, Playbook, Value } from "./types";
 import { checkArgExistance, validateArgs } from "./validation";
 
 export const buildActionTxs = (
@@ -9,7 +7,7 @@ export const buildActionTxs = (
   actionId: string,
   args: Record<string, string>,
   msgSender: string,
-): BaseTransaction[] => {
+): BatchTransaction[] => {
   const action = playbook.actions.find(action => action.id === actionId);
   if (action === undefined) throw new Error("Unknown action");
 

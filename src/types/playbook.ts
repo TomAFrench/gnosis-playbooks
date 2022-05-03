@@ -60,11 +60,7 @@ export const isValidValueType = (obj: unknown): obj is ValueType => {
 const isValue = (obj: any): obj is Argument => {
   if (obj === null || obj === undefined) return false;
 
-  return (
-    typeof obj === "object" &&
-    typeof obj.value === "string" &&
-    isValidValueType(obj.type)
-  );
+  return typeof obj === "object" && typeof obj.value === "string" && isValidValueType(obj.type);
 };
 
 export const isArgument = (obj: any): obj is Argument => {
