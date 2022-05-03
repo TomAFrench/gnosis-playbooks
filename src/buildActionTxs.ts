@@ -37,7 +37,7 @@ export const buildActionTxs = (
 
   // Final check that we have a value for every placeholder in the transactions array before we attempt to build it.
   checkArgExistance(
-    action.transactions.flatMap(transaction => transaction.args),
+    action.transactions.flatMap(transaction => transaction.args ?? []),
     mergedArgs,
   );
   return fillTransactionTemplates(action, mergedArgs);

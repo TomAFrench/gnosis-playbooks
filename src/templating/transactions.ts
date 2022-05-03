@@ -5,7 +5,7 @@ import { BatchTransaction, ContractInput, ContractMethod } from "../types/batchf
 
 const fillTransactionTemplate = (transaction: Transaction, args: Record<string, Value>): BatchTransaction => {
   const target = args[transaction.to].value;
-  const argumentArray = transaction.args.map(argumentId => args[argumentId].value);
+  const argumentArray = (transaction.args ?? []).map(argumentId => args[argumentId].value);
   const contractInterface = new Interface([`function ${transaction.function}`]);
 
   const calldata = contractInterface.encodeFunctionData(transaction.function, argumentArray);

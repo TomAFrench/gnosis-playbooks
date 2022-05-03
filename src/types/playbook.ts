@@ -28,7 +28,7 @@ export type Variable = {
 export type Transaction = {
   to: string;
   function: string;
-  args: string[];
+  args?: string[];
 };
 
 export type Action = {
@@ -94,8 +94,8 @@ export const isTransaction = (obj: any): obj is Transaction => {
   return (
     typeof obj.to === "string" &&
     typeof obj.function === "string" &&
-    Array.isArray(obj.args) &&
-    obj.args.every((value: any) => typeof value == "string")
+    typeof obj.args === "undefined" || (Array.isArray(obj.args) &&
+    obj.args.every((value: any) => typeof value == "string"))
   );
 };
 
@@ -118,7 +118,7 @@ export const isPlaybook = (obj: any): obj is Playbook => {
   const validVersion = typeof obj.version === "string";
   const validChainId = typeof obj.chainId === "number";
   const validConstants =
-    obj.constants === "undefined" ||
+    typeof obj.constants === "undefined" ||
     (typeof obj.constants === "object" && Object.values(obj.constants).every((value: any) => isValue(value)));
   const validActions = Array.isArray(obj.actions) && obj.actions.every((value: any) => isAction(value));
 
